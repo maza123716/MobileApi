@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,11 +34,14 @@ public class UserActivity extends AppCompatActivity {
     TextView logIn;
     TextView email;
     Button ownedrepos;
+    Button addUser;
 
     Bundle extras;
     String newString;
 
     Bitmap myImage;
+
+    private DBHandler dbHandler;
 
 
     @Override
@@ -52,12 +56,38 @@ public class UserActivity extends AppCompatActivity {
         logIn = (TextView) findViewById(R.id.logIn);
         email = (TextView) findViewById(R.id.email);
         ownedrepos = (Button) findViewById(R.id.ownedReposBtn);
+        addUser = (Button) findViewById(R.id.addUserBtn);
+
+        dbHandler = new DBHandler(UserActivity.this);
+
+        addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Name = userNameTV.getText().toString();
+                String Followers = followersTV.getText().toString();
+                String Following = followingTV.getText().toString();
+                String Login = logIn.getText().toString();
+                String Email = email.getText().toString();
+
+                dbHandler.addUser(userNameTV, followersTV, followingTV, logIn, email);
+                Toast.makeText(UserActivity.this, "User has been added.", Toast.LENGTH_SHORT).show();
+                userNameTV.setText("");
+                followersTV.setText("");
+                followingTV.setText("");
+                logIn.setText("");
+                email.setText("");
+            }
+        });
+
 
         extras = getIntent().getExtras();
         newString = extras.getString("STRING_I_NEED");
 
         System.out.println(newString);
         loadData();
+
+
+
     }
 
     public void loadOwnRepos(View view){
@@ -147,4 +177,5 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 }
+
 

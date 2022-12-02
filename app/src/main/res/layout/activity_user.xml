@@ -46,6 +46,16 @@
         style="@android:style/TextAppearance"/>
 
     <Button
+        android:id="@+id/addUserBtn"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/add_user"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
         android:id="@+id/ownedReposBtn"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
